@@ -6,14 +6,14 @@ import dynamic from "next/dynamic";
 
 const Page = dynamic(() => import('../components/Page'), {ssr: true})
 
-export default function Graphiql({desktopData, mobileData, isAuthorVersion, pageHost, imageHost, fetchError}) {
+export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
 
   return !desktopData && !mobileData ? (
     fetchError ? (
       <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
     ) : null
   ) : (
-    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} pageHost={pageHost} imageHost={imageHost} />
+    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
   );
 }
 
@@ -34,8 +34,7 @@ export async function getStaticProps() {
     desktopData: await downloadData(hostConfig, "desktop"),
     mobileData: await downloadData(hostConfig, "mobile"),
     isAuthorVersion: false,
-    pageHost: "https://publish-p81252-e700817.adobeaemcloud.com/",
-    imageHost: "https://smartimaging.scene7.com/is/image/kasingh/", 
+    customHost: "https://publish-p81252-e700817.adobeaemcloud.com/",
     fetchError: null
   };
 

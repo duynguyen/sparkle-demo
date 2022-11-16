@@ -15,16 +15,16 @@ function isMobileData({ backgroundProps, panelNr, host }) {
 }
 
 export default function Background(props) {
-  const { backgroundProps, panelNr, host } = props;
+  const { backgroundProps, panelNr } = props;
   const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
 
   const imageName = backgroundContent?._path?.split('/').slice(-1)[0].split('.')[0];
   const imageExt = backgroundContent?._path?.split('/').slice(-1)[0].split('.')[1];
 
-  // const source = host + backgroundContent?._path;
   let source = backgroundContent?._publishUrl;
+  
   if(imageExt !== 'mp4') {
-    source = host + imageName;
+    source = imageName;
   }
 
   const windowSize = useContext(WindowSizeProvider);
