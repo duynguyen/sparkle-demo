@@ -18,7 +18,10 @@ export default function LayerImage(props) {
   const { data, panelNr, host } = props;
   const { image, altText, layerId, id, overflow, basePosition, debug, fit, forceLoad } = data;
 
-  const source = host + image?._path;
+  const imageName = image?._path?.split('/').slice(-1)[0].split('.')[0];
+
+  // const source = host + image?._path;
+  const source = host + imageName;
 
   const windowSize = useContext(WindowSizeProvider);
   const mobileMode = windowSize.width <= 840;

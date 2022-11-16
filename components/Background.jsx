@@ -18,7 +18,14 @@ export default function Background(props) {
   const { backgroundProps, panelNr, host } = props;
   const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
 
-  const source = host + backgroundContent?._path;
+  const imageName = backgroundContent?._path?.split('/').slice(-1)[0].split('.')[0];
+  const imageExt = backgroundContent?._path?.split('/').slice(-1)[0].split('.')[1];
+
+  // const source = host + backgroundContent?._path;
+  let source = backgroundContent?._publishUrl;
+  if(imageExt !== 'mp4') {
+    source = host + imageName;
+  }
 
   const windowSize = useContext(WindowSizeProvider);
   const mobileMode = windowSize.width <= 840;

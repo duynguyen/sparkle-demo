@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 const MobileHeader = dynamic(() => import('../components/MobileHeader'), {ssr: true})
 const Panel = dynamic(() => import('../components/Panel'), {ssr: true})
 
-export default function Page({ desktopData, mobileData, isAuthorVersion, host }) {
+export default function Page({ desktopData, mobileData, isAuthorVersion, pageHost, imageHost }) {
   const [viewType, setViewType] = useState("mobile");
   const [data, setData] = useState(viewType === "mobile" ? mobileData : desktopData);
   const [hash, setHash] = useState(null);
@@ -116,7 +116,7 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host })
         {viewType === "mobile" && (
           <MobileHeader
             isAuthorVersion={isAuthorVersion}
-            host={host}
+            host={pageHost}
             mobileNavObj={data?.mobileNavMenu}
             debugAnim={debugAnim}
             maxWidth={840}
@@ -136,7 +136,7 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host })
                 key={index}
                 runOnEnd={index === 0 ? handleEndOfIntroAnimation : null}
                 isAuthorVersion={isAuthorVersion}
-                host={host}
+                host={imageHost}
                 hash={hash}
                 ignoreHash={ignoreHash}
                 setIgnoreHash={setIgnoreHash}
